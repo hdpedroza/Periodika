@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Periódika | Tabela Periódica Interativa</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;600;800&display=swap">
+<style>
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);
+--bg:#f3f5f8;--fg:#17283f;--mut:#566175;--card:#fff;--bd:#d3d9e3;--cl:84%;--cs:62%;--ct:18%}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1724;--fg:#e9eef6;--mut:#9aa7bb;--card:#16263b;--bd:#2a3c56;--cl:30%;--cs:38%;--ct:93%}}
+:root[data-theme="dark"]{--bg:#0e1724;--fg:#e9eef6;--mut:#9aa7bb;--card:#16263b;--bd:#2a3c56;--cl:30%;--cs:38%;--ct:93%}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:Figtree,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.45}
+main{max-width:1180px;margin:0 auto;padding:20px 14px 40px}
+h1{margin:0}
+.brand{display:flex;align-items:center;gap:12px;color:#1d4f91;font-size:clamp(24px,5vw,34px);font-weight:800;letter-spacing:.1em;text-transform:uppercase}
+.brand svg{width:1.45em;height:1.45em;flex:none;text-transform:none;letter-spacing:0}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .brand{color:#7db4f5}}
+:root[data-theme="dark"] .brand{color:#7db4f5}
+.sub{margin:4px 0 18px;color:var(--mut)}
+.bar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:12px}
+input[type=search]{flex:1 1 240px;min-width:0;padding:10px 12px;border:1px solid var(--bd);border-radius:8px;background:var(--card);color:var(--fg);font:inherit}
+button{font:inherit;color:var(--fg)}
+.seg{display:flex;border:1px solid var(--bd);border-radius:8px;overflow:hidden;background:var(--card)}
+.seg button,.btn{border:0;background:transparent;padding:10px 14px;cursor:pointer}
+.seg button[aria-pressed=true]{background:var(--fg);color:var(--bg)}
+.btn{border:1px solid var(--bd);border-radius:8px;background:var(--card)}
+.btn.on{background:var(--fg);color:var(--bg)}
+button:focus-visible,input:focus-visible{outline:3px solid #3b82f6;outline-offset:2px}
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chip{display:flex;align-items:center;gap:6px;border:1px solid var(--bd);border-radius:99px;background:var(--card);padding:4px 10px;font-size:13px;cursor:pointer}
+.chip i{width:12px;height:12px;border-radius:3px;background:var(--b)}
+.chip[aria-pressed=true]{outline:2px solid var(--fg)}
+.wrap{overflow-x:auto;padding-bottom:6px}
+.pt{display:grid;grid-template-columns:24px repeat(18,minmax(50px,1fr));gap:3px;min-width:950px}
+.gh{grid-row:1;text-align:center;font-size:12px;font-weight:600;color:var(--mut);align-self:end}
+.pl{grid-column:1;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--mut)}
+.el,.ph{position:relative;aspect-ratio:1;border-radius:6px;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1.1;
+background:var(--b);color:var(--t)}
+.el{border:0;padding:2px;cursor:pointer;transition:opacity .15s}
+.ph{font-size:10px;text-align:center;opacity:.9}.ph b{font-size:11px}
+.el .n{position:absolute;top:2px;left:4px;font-size:9px}
+.el .s{font-size:18px;font-weight:800}
+.el .nm,.el .m{font-size:8px;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.el:focus-visible{z-index:2}
+.el.sel{outline:3px solid var(--fg);outline-offset:1px;z-index:1}
+.el.dim,.ph.dim{opacity:.16}
+.quiz .el>*{visibility:hidden}
+.el.ok{outline:3px solid #16a34a}.el.bad{outline:3px solid #dc2626}
+#qbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;padding:12px;margin-bottom:12px;border:1px solid var(--bd);border-radius:8px;background:var(--card)}
+#qbar b{font-size:20px}
+.info{margin-top:16px;display:grid;grid-template-columns:150px 1fr;gap:18px;padding:16px;border:1px solid var(--bd);border-radius:10px;background:var(--card)}
+.big{aspect-ratio:1;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--b);color:var(--t)}
+.big .s{font-size:54px;font-weight:800;line-height:1}.big .n{font-size:13px}
+.info h2{margin:0 0 8px;font-size:24px}
+dl{display:grid;grid-template-columns:max-content 1fr;gap:4px 14px;margin:0}
+dt{color:var(--mut)}dd{margin:0}
+.tr{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:10px;margin-top:16px}.tr div{border:1px solid var(--bd);border-radius:10px;background:var(--card);padding:12px}.tr b{display:block}.tr .ar{font-size:24px;letter-spacing:.2em}.tr p{margin:4px 0 0;font-size:14px;color:var(--mut);text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+.foot{margin-top:14px;font-size:12.5px;color:var(--mut);text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+@media (max-width:560px){.info{grid-template-columns:1fr}.big{max-width:150px}}
+.x{display:none}
+.proj main{max-width:none}
+.proj .pt{min-width:1500px}
+.proj .el .s{font-size:clamp(22px,2.4vw,40px)}
+.proj .el .nm,.proj .el .m{font-size:clamp(10px,.95vw,16px)}
+.proj .el .n{font-size:clamp(10px,.9vw,14px)}
+@media (max-width:700px){
+.el .nm,.el .m{display:none}.el .s{font-size:20px}
+.info{position:fixed;left:0;right:0;bottom:0;z-index:20;margin:0;max-height:55vh;overflow:auto;border-radius:16px 16px 0 0;box-shadow:0 -6px 24px rgba(0,0,0,.35);padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+.info.empty{display:none!important}
+.x{display:block;position:absolute;top:10px;right:10px}
+.sheet main{padding-bottom:60vh}
+.big{max-width:110px}}
+@supports not (aspect-ratio:1){.el,.ph{height:58px}.big{height:130px}.proj .el,.proj .ph{height:96px}.bar>*{margin:0 8px 8px 0}.legend>*{margin:0 6px 6px 0}#qbar>*{margin:0 12px 0 0}.brand svg{margin-right:12px}.chip i{margin-right:6px}}
+.ns{margin:0 0 14px;padding:12px;border:1px solid var(--bd);border-radius:8px;background:var(--card)}
+@media (prefers-reduced-motion:reduce){.el{transition:none}}
+</style>
+</head>
+<body>
+<main>
+<h1 class="brand"><svg viewBox="0 0 48 48" aria-hidden="true"><g fill="none" stroke="currentColor" stroke-width="2"><circle cx="24" cy="24" r="7"/><circle cx="24" cy="24" r="13"/><circle cx="24" cy="24" r="20"/></g><circle cx="24" cy="24" r="3" fill="currentColor"/><g style="stroke:var(--bg)" stroke-width="1.5"><circle cx="20.5" cy="17.9" r="2.4" fill="currentColor"/><circle cx="35.3" cy="30.5" r="2.4" fill="currentColor"/><circle cx="38.1" cy="9.9" r="2.8" fill="#f59e0b"/></g></svg>Periódika</h1>
+<p class="sub">Tabela periódica interativa para aulas de Química.</p>
+<noscript><p class="ns">Esta tabela precisa de JavaScript. No iPhone, abra o link no Safari ou no Chrome. A pré-visualização do WhatsApp e do app Arquivos não executa a página.</p></noscript>
+<section class="bar">
+<input id="q" type="search" placeholder="Buscar por nome, símbolo ou número atômico" aria-label="Buscar elemento">
+<div class="seg" role="group" aria-label="Colorir por"><button data-m="cat" aria-pressed="true">Categoria</button><button data-m="st" aria-pressed="false">Estado físico a 25 °C</button><button data-m="bl" aria-pressed="false">Blocos</button></div>
+<button class="btn" id="qz">Modo desafio</button>
+<button class="btn" id="pj" aria-pressed="false">Modo projeção</button>
+<button class="btn" id="od" aria-pressed="false">Ordem de Pauling</button>
+</section>
+<div id="qbar" hidden></div>
+<div class="legend" id="legend"></div>
+<div class="wrap"><div class="pt" id="pt"></div></div>
+<section class="info" id="info" aria-live="polite"></section>
+<section class="tr" aria-label="Tendências periódicas">
+<div><b>Raio atômico</b><span class="ar">↓ ←</span><p>Aumenta de cima para baixo no grupo, por causa do maior número de camadas, e da direita para a esquerda no período, pois a carga nuclear efetiva diminui.</p></div>
+<div><b>Energia de ionização</b><span class="ar">↑ →</span><p>Aumenta de baixo para cima no grupo e da esquerda para a direita no período. Os gases nobres têm os maiores valores de cada período.</p></div>
+<div><b>Afinidade eletrônica</b><span class="ar">↑ →</span><p>Aumenta de baixo para cima e da esquerda para a direita, sem considerar os gases nobres. Há exceções, como o flúor, cuja afinidade é menor que a do cloro.</p></div>
+<div><b>Eletronegatividade</b><span class="ar">↑ →</span><p>Aumenta de baixo para cima e da esquerda para a direita, sem considerar os gases nobres.</p></div>
+</section>
+<p class="foot">Massas atômicas arredondadas a partir dos valores abreviados da IUPAC; valores entre colchetes são o número de massa do isótopo mais estável (nos elementos sintéticos, pode variar entre fontes). Estado físico indicado só para o que está bem estabelecido a 25 °C; os demais aparecem como não determinado. Distribuição eletrônica no estado fundamental, com as exceções mais conhecidas (Cr, Cu, Pd, Ag, Au e outras), conferida com a base NIST/CRC até o nobélio; a partir do Z = 103 os valores são previsões. A distribuição é mostrada completa, sem abreviações, e organizada por camada; pelo botão "Ordem de Pauling" ela passa a ser escrita na ordem crescente de energia. Categorias e cores seguem a tabela de referência do Manual da Química; os elementos 109 a 111 e 113 a 118 aparecem em cinza (propriedades químicas desconhecidas). No modo Blocos, a posição na tabela define a cor, e por isso o He aparece no bloco p, embora sua configuração seja 1s². Números de oxidação: em negrito, os mais comuns; o NOX 0 vale para qualquer elemento na forma de substância simples. Os valores seguem Greenwood e Earnshaw (Chemistry of the Elements, 2ª ed.), conferidos com a lista de estados de oxidação baseada nessa obra e, para Pt e Tl, com outras fontes. Estados observados apenas em condições extremas (fase gasosa, ânions de Zintl, carbonilos metálicos) foram omitidos, portanto a lista não é exaustiva.</p>
+<p class="foot" style="text-align:right;font-size:11.5px;opacity:.9">Prof. Héverson Dias Pedroza</p>
+</main>
+<script>
+const R="H|Hidrogênio|1,008;He|Hélio|4,003;Li|Lítio|6,94;Be|Berílio|9,012;B|Boro|10,81;C|Carbono|12,011;N|Nitrogênio|14,007;O|Oxigênio|15,999;F|Flúor|18,998;Ne|Neônio|20,180;Na|Sódio|22,990;Mg|Magnésio|24,305;Al|Alumínio|26,982;Si|Silício|28,085;P|Fósforo|30,974;S|Enxofre|32,06;Cl|Cloro|35,45;Ar|Argônio|39,95;K|Potássio|39,098;Ca|Cálcio|40,078;Sc|Escândio|44,956;Ti|Titânio|47,867;V|Vanádio|50,942;Cr|Cromo|51,996;Mn|Manganês|54,938;Fe|Ferro|55,845;Co|Cobalto|58,933;Ni|Níquel|58,693;Cu|Cobre|63,546;Zn|Zinco|65,38;Ga|Gálio|69,723;Ge|Germânio|72,630;As|Arsênio|74,922;Se|Selênio|78,971;Br|Bromo|79,904;Kr|Criptônio|83,798;Rb|Rubídio|85,468;Sr|Estrôncio|87,62;Y|Ítrio|88,906;Zr|Zircônio|91,222;Nb|Nióbio|92,906;Mo|Molibdênio|95,95;Tc|Tecnécio|[98];Ru|Rutênio|101,07;Rh|Ródio|102,91;Pd|Paládio|106,42;Ag|Prata|107,87;Cd|Cádmio|112,41;In|Índio|114,82;Sn|Estanho|118,71;Sb|Antimônio|121,76;Te|Telúrio|127,60;I|Iodo|126,90;Xe|Xenônio|131,29;Cs|Césio|132,91;Ba|Bário|137,33;La|Lantânio|138,91;Ce|Cério|140,12;Pr|Praseodímio|140,91;Nd|Neodímio|144,24;Pm|Promécio|[145];Sm|Samário|150,36;Eu|Európio|151,96;Gd|Gadolínio|157,25;Tb|Térbio|158,93;Dy|Disprósio|162,50;Ho|Hólmio|164,93;Er|Érbio|167,26;Tm|Túlio|168,93;Yb|Itérbio|173,05;Lu|Lutécio|174,97;Hf|Háfnio|178,49;Ta|Tântalo|180,95;W|Tungstênio|183,84;Re|Rênio|186,21;Os|Ósmio|190,23;Ir|Irídio|192,22;Pt|Platina|195,08;Au|Ouro|196,97;Hg|Mercúrio|200,59;Tl|Tálio|204,38;Pb|Chumbo|207,2;Bi|Bismuto|208,98;Po|Polônio|[209];At|Astato|[210];Rn|Radônio|[222];Fr|Frâncio|[223];Ra|Rádio|[226];Ac|Actínio|[227];Th|Tório|232,04;Pa|Protactínio|231,04;U|Urânio|238,03;Np|Neptúnio|[237];Pu|Plutônio|[244];Am|Amerício|[243];Cm|Cúrio|[247];Bk|Berquélio|[247];Cf|Califórnio|[251];Es|Einstênio|[252];Fm|Férmio|[257];Md|Mendelévio|[258];No|Nobélio|[259];Lr|Laurêncio|[266];Rf|Rutherfórdio|[267];Db|Dúbnio|[268];Sg|Seabórgio|[269];Bh|Bóhrio|[270];Hs|Hássio|[277];Mt|Meitnério|[278];Ds|Darmstádio|[281];Rg|Roentgênio|[282];Cn|Copernício|[285];Nh|Nihônio|[286];Fl|Fleróvio|[289];Mc|Moscóvio|[290];Lv|Livermório|[293];Ts|Tenesso|[294];Og|Oganessônio|[294]";
+const E=R.split(";").map((r,i)=>{const [s,n,m]=r.split("|");return{z:i+1,s,n,m}});
+const CATS={alk:["Metais alcalinos","#dc2626","#fff"],ake:["Metais alcalinoterrosos","#e0a93b","#2a1d00"],tr:["Metais de transição","#4ade80","#0a2415"],pt:["Metais pós-transição","#9333ea","#fff"],mt:["Semimetais","#facc15","#2a2200"],nmp:["Não metais poliatômicos","#15803d","#fff"],nmd:["Não metais diatômicos","#f97316","#2a1000"],ng:["Gases nobres","#db2777","#fff"],la:["Lantanídeos","#1d4ed8","#fff"],ac:["Actinídeos","#60a5fa","#0b1b33"],un:["Propriedades químicas desconhecidas","#7a6e6e","#fff"]};
+const STS={s:["Sólido","#2563eb","#fff"],l:["Líquido","#0f766e","#fff"],g:["Gasoso","#f97316","#2a1000"],u:["Não determinado","#7a6e6e","#fff"]};
+const inL=(a,z)=>a.includes(z);
+function cat(z){if(z>=109&&z!==112)return"un";if(inL([2,10,18,36,54,86],z))return"ng";if(inL([1,7,8,9,17,35,53],z))return"nmd";if(inL([6,15,16,34],z))return"nmp";if(inL([5,14,32,33,51,52,85],z))return"mt";if(inL([13,31,49,50,81,82,83,84],z))return"pt";if(inL([3,11,19,37,55,87],z))return"alk";if(inL([4,12,20,38,56,88],z))return"ake";if(z>=57&&z<=71)return"la";if(z>=89&&z<=103)return"ac";return"tr"}
+function st(z){if(inL([1,2,7,8,9,10,17,18,36,54,86],z))return"g";if(inL([35,80],z))return"l";if(z===85||z===87||z>=99)return"u";return"s"}
+function pos(z){const P=[0,2,10,18,36,54,86,118];let p=1;while(z>P[p])p++;if(z===1)return[1,1,1];if(z===2)return[1,18,1];
+const i=z-P[p-1];if(p<4)return[p,i<=2?i:10+i,p];if(p<6)return[p,i,p];
+if(z>=57&&z<=71)return[9,4+z-57,0];if(z>=89&&z<=103)return[10,4+z-89,0];
+const off=p===6?72:104;if(z<off)return[p,i,p];return[p,4+z-off,p]}
+const ORD=["1s","2s","2p","3s","3p","4s","3d","4p","5s","4d","5p","6s","4f","5d","6p","7s","5f","6d","7p"],CAP={s:2,p:6,d:10,f:14};
+function fill(z){const r=[];let n=z;for(const o of ORD){const c=Math.min(n,CAP[o[1]]);if(c>0)r.push([o,c]);n-=c;if(n<=0)break}return r}
+const NOB=[[86,"Rn"],[54,"Xe"],[36,"Kr"],[18,"Ar"],[10,"Ne"],[2,"He"]];
+const OV={24:"3d5 4s1",29:"3d10 4s1",41:"4d4 5s1",42:"4d5 5s1",44:"4d7 5s1",45:"4d8 5s1",46:"4d10",47:"4d10 5s1",57:"5d1 6s2",58:"4f1 5d1 6s2",64:"4f7 5d1 6s2",78:"4f14 5d9 6s1",79:"4f14 5d10 6s1",89:"6d1 7s2",90:"6d2 7s2",91:"5f2 6d1 7s2",92:"5f3 6d1 7s2",93:"5f4 6d1 7s2",96:"5f7 6d1 7s2",103:"5f14 7s2 7p1"};
+const SUP="⁰¹²³⁴⁵⁶⁷⁸⁹",sup=n=>String(n).split("").map(d=>SUP[d]).join("");
+function cfg(z){const core=NOB.find(c=>c[0]<z),cc=core?fill(core[0]):[];let rest;
+if(OV[z])rest=OV[z].split(" ").map(t=>[t.slice(0,2),+t.slice(2)]);
+else{rest=fill(z).slice(cc.length);const L="spdf";rest.sort((a,b)=>a[0][0]-b[0][0]||L.indexOf(a[0][1])-L.indexOf(b[0][1]))}
+const sh={};cc.concat(rest).forEach(([o,c])=>sh[o[0]]=(sh[o[0]]||0)+c);
+const all=cc.concat(rest).sort((a,b)=>a[0][0]-b[0][0]||"spdf".indexOf(a[0][1])-"spdf".indexOf(b[0][1]));
+return{txt:all.map(([o,c])=>o+sup(c)).join(" "),te:all.slice().sort((a,b)=>ORD.indexOf(a[0])-ORD.indexOf(b[0])).map(([o,c])=>o+sup(c)).join(" "),sh:Object.values(sh).join(", ")}}
+const NX="-1*,+1*;;+1*;+2*;+3*;-4*,-3*,-2*,-1*,+1*,+2*,+3*,+4*;-3*,-2,-1,+1,+2,+3*,+4,+5*;-2*,-1,+1,+2;-1*;;+1*;+2*;+3*;-4*,+4*;-3*,+1,+3*,+5*;-2*,-1,+1,+2*,+3,+4*,+5,+6*;-1*,+1*,+3*,+4,+5*,+7*;;+1*;+2*;+3*;+2,+3,+4*;+2,+3,+4,+5*;+2,+3*,+4,+5,+6*;+2*,+3,+4*,+5,+6,+7*;+2*,+3*,+6*;+2*,+3*;+2*,+3,+4;+1,+2*,+3;+2*;+3*;-4*,+2*,+4*;-3*,+3*,+5*;-2*,+2*,+4*,+6*;-1*,+1*,+3*,+5*,+7;+2*;+1*;+2*;+3*;+4*;+3,+4,+5*;+2,+3,+4*,+5,+6*;+4*,+5,+6,+7*;+2,+3*,+4*,+5,+6,+7,+8;+1,+2,+3*,+4,+5,+6;+2*,+4*;+1*,+2,+3;+2*;+1,+3*;-4*,+2*,+4*;-3*,+3*,+5*;-2*,+2*,+4*,+6*;-1*,+1*,+3*,+5*,+7*;+2*,+4*,+6*,+8;+1*;+2*;+3*;+3*,+4*;+3*,+4;+3*;+3*;+2,+3*;+2*,+3*;+3*;+3*,+4;+3*;+3*;+3*;+3*;+2,+3*;+3*;+4*;+5*;+4*,+5,+6*;+3,+4*,+5,+6,+7;+2,+3,+4*,+5,+6,+8;+1,+3*,+4*,+5,+6;+2*,+4*,+5,+6;+1,+3*,+5;+1*,+2*;+1*,+3*;+2*,+4*;+3*,+5;-2*,+2*,+4*;-1*,+1*,+3,+5;+2*;+1*;+2*;+3*;+4*;+4,+5*;+3,+4,+5,+6*;+3,+4,+5*,+6,+7;+3,+4*,+5,+6;+3*,+4,+5,+6;+3*,+4;+3*,+4;+2,+3*,+4;+2,+3*;+2,+3*;+2,+3*;+2*,+3;+3*;+4*;+5*;+6*;+7*;+8*;;;;+2*;;;;;;".split(";");
+const NN={85:" (estudado só em quantidades mínimas)",104:" (dados experimentais limitados)",105:" (dados experimentais limitados)",106:" (dados experimentais limitados)",107:" (dados experimentais limitados)",108:" (dados experimentais limitados)",112:" (previsto)"};
+function nox(z){const s=NX[z-1];if(!s)return[2,10,18].includes(z)?"sem compostos estáveis conhecidos":"não determinado (poucos átomos produzidos)";return s.split(",").map(v=>{const x=v.replace("*","").replace("-","\u2212");return v.endsWith("*")?`<b>${x}</b>`:x}).join(", ")+(NN[z]||"")}
+const norm=s=>s.normalize("NFD").replace(/[\u0300-\u036f]/g,"").toLowerCase();
+let mode="cat",flt=null,sel=null,qry="",quiz=null,ord="n";
+function fam(z,c,p){if(p===0)return z<=71?"Lantanídeos (transição interna)":"Actinídeos (transição interna)";if(c===1)return z===1?"Hidrogênio (posição própria no grupo 1)":"Metais alcalinos (família 1A)";const F={2:"Alcalinoterrosos (família 2A)",13:"Família do boro (3A)",14:"Família do carbono (4A)",15:"Família do nitrogênio (5A)",16:"Calcogênios (6A)",17:"Halogênios (7A)",18:"Gases nobres (8A)"};return F[c]||"Metais de transição (grupo "+c+")"}
+const $=id=>document.getElementById(id);
+const BLK={s:["Bloco s","#fbb27a","#2a1500"],p:["Bloco p","#ef8096","#33000d"],d:["Bloco d","#6fbf49","#0d2405"],f:["Bloco f","#8fb4e3","#0b1b33"]};
+const blk=z=>{const [,c,p]=pos(z);return p===0?"f":c<=2?"s":c>=13?"p":"d"};
+const key=z=>mode==="cat"?cat(z):mode==="st"?st(z):blk(z);
+const sty=z=>{const k=mode==="cat"?CATS[cat(z)]:mode==="st"?STS[st(z)]:BLK[blk(z)];return`--b:${k[1]};--t:${k[2]}`};
+function match(z){const e=E[z-1];if(flt&&key(z)!==flt)return false;if(!qry)return true;const q=norm(qry);return String(z)===qry||norm(e.s).startsWith(q)||norm(e.n).includes(q)}
+function build(){const g=$("pt");g.innerHTML='<div style="grid-row:9;grid-column:1;height:10px"></div>'+Array.from({length:18},(_,i)=>`<div class="gh" style="grid-column:${i+2}">${i+1}</div>`).join("")+[1,2,3,4,5,6,7].map(n=>`<div class="pl" style="grid-row:${n+1}">${n}</div>`).join("");
+E.forEach(e=>{const [r,c]=pos(e.z);const b=document.createElement("button");b.className="el";b.dataset.z=e.z;b.style.cssText=`grid-row:${r+1};grid-column:${c+1}`;
+b.setAttribute("aria-label",`${e.n}, ${e.s}, número atômico ${e.z}`);
+b.innerHTML=`<span class="n">${e.z}</span><span class="s">${e.s}</span><span class="nm">${e.n}</span><span class="m">${e.m}</span>`;
+b.onclick=()=>pick(e.z);g.appendChild(b)});
+[[6,"La-Lu","57-71","la"],[7,"Ac-Lr","89-103","ac"]].forEach(([r,t,n,k])=>{const d=document.createElement("div");d.className="ph";d.dataset.k=k;d.style.gridRow=r+1;d.style.gridColumn=4;d.innerHTML=`<b>${t}</b>${n}`;g.appendChild(d)})}
+function paint(){document.querySelectorAll(".ph").forEach(d=>{const k=mode==="cat"?CATS[d.dataset.k]:mode==="bl"?BLK.f:STS.u;d.style.setProperty("--b",k[1]);d.style.setProperty("--t",k[2]);d.classList.toggle("dim",!!qry||(!!flt&&!((mode==="cat"&&flt===d.dataset.k)||(mode==="bl"&&flt==="f"))))});
+document.querySelectorAll(".el").forEach(b=>{const z=+b.dataset.z;b.style.cssText=b.style.cssText.replace(/--[bt]:[^;]*;?/g,"")+";"+sty(z);b.classList.toggle("dim",!match(z));b.classList.toggle("sel",z===sel)});
+const src=mode==="cat"?CATS:mode==="st"?STS:BLK,keys=Object.keys(src);
+$("legend").innerHTML=keys.map(k=>`<button class="chip" data-k="${k}" aria-pressed="${flt===k}"><i style="--b:${src[k][1]}"></i>${src[k][0]}</button>`).join("");
+$("legend").querySelectorAll(".chip").forEach(c=>c.onclick=()=>{flt=flt===c.dataset.k?null:c.dataset.k;paint()});
+$("pt").classList.toggle("quiz",!!quiz)}
+function info(){const el=$("info");el.classList.toggle("empty",!sel);document.body.classList.toggle("sheet",!!sel);if(!sel){el.innerHTML='<div><b>Selecione um elemento</b><p style="margin:6px 0 0;color:var(--mut)">Clique em qualquer quadrado para ver massa, grupo, período, estado físico e distribuição eletrônica.</p></div>';el.style.display="block";return}
+el.style.display="";const e=E[sel-1],[r,c,p]=pos(sel),k=cfg(sel);
+const loc=p?`Grupo ${c}, ${p}º período`:(sel<=71?"Série dos lantanídeos (6º período)":"Série dos actinídeos (7º período)");
+el.innerHTML=`<div class="big" style="${sty(sel)}"><span class="n">${e.z}</span><span class="s">${e.s}</span></div><div><h2>${e.n}</h2><button class="btn x" id="cl">Fechar</button><dl><dt>Massa atômica</dt><dd>${e.m} u</dd><dt>Posição</dt><dd>${loc}</dd><dt>Família</dt><dd>${fam(sel,c,p)}</dd><dt>Categoria</dt><dd>${CATS[cat(sel)][0]}</dd><dt>Estado a 25 °C</dt><dd>${STS[st(sel)][0]}</dd><dt>Número de oxidação</dt><dd>${nox(sel)}</dd><dt>Distribuição eletrônica${ord==="e"?" (ordem de energia)":""}</dt><dd>${ord==="e"?k.te:k.txt}${sel>=103?" (previsto)":""}</dd><dt>Elétrons por camada</dt><dd>${k.sh}</dd></dl></div>`;$("cl").onclick=()=>{sel=null;info();paint()}}
+function pick(z){if(quiz){const b=document.querySelector(`.el[data-z="${z}"]`);if(z===quiz.t){quiz.ok++;flash(b,"ok");next()}else{quiz.err++;flash(b,"bad");qui()}return}sel=z;info();paint()}
+function flash(b,c){b.classList.add(c);setTimeout(()=>b.classList.remove(c),700)}
+function next(){quiz.t=1+Math.floor(Math.random()*118);qui();paint()}
+function qui(){const q=$("qbar");q.hidden=false;q.innerHTML=`<span>Onde fica o elemento <b>${E[quiz.t-1].n}</b>?</span><span>Acertos: ${quiz.ok}</span><span>Erros: ${quiz.err}</span><button class="btn" id="skip">Pular</button>`;$("skip").onclick=next}
+$("qz").onclick=()=>{const b=$("qz");if(quiz){quiz=null;$("q").disabled=false;$("qbar").hidden=true;b.classList.remove("on");b.textContent="Modo desafio";paint();return}
+quiz={ok:0,err:0,t:0};qry="";$("q").value="";$("q").disabled=true;sel=null;info();b.classList.add("on");b.textContent="Encerrar desafio";next()};
+$("q").oninput=e=>{qry=e.target.value.trim();paint()};
+document.querySelectorAll(".seg button").forEach(b=>b.onclick=()=>{mode=b.dataset.m;flt=null;document.querySelectorAll(".seg button").forEach(x=>x.setAttribute("aria-pressed",x===b));paint();info()});
+$("pj").onclick=e=>{const on=document.body.classList.toggle("proj");e.target.classList.toggle("on",on);e.target.setAttribute("aria-pressed",on)};
+$("od").onclick=e=>{ord=ord==="n"?"e":"n";e.target.classList.toggle("on",ord==="e");e.target.setAttribute("aria-pressed",ord==="e");info()};
+build();paint();info();
+</script>
+</body>
+</html>
